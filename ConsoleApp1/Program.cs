@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using LogConverter.Application.Services;
 using Domain.Interfaces;
-using Infrastructure.Fetchers;
-using Infrastructure.Parsers;
-using Infrastructure.Writers;
+using FluentValidation;
+using ConsoleApp;
+using Domain.Request;
 
 namespace LogConverter.ConsoleApp;
 
@@ -11,32 +10,43 @@ class Program
 {
     static async Task Main(string[] args)
     {
-        var serviceProvider = new ServiceCollection()
-            .AddTransient<ILogFetcher, HttpLogFetcher>()
-            .AddTransient<ILogParser, MinhaCdnLogParser>()
-            .AddTransient<ILogFormatter, AgoraLogFormatter>()
-            .AddTransient<ILogWriter, FileLogWriter>()
-            .AddTransient<ILogConverter, LogConversionService>()
-            .BuildServiceProvider();
+        if (args.Length != 2)
+        {
+            Console.WriteLine("Erro: Você deve fornecer exatamente 2 argumentos: <sourceUrl> e <targetPath>.");
+            return;
+        }
+
+        var sourceUrl = args[0];
+        var targetPath = args[1];
+
+        var serviceCollection = new ServiceCollection();
+        ServiceRegistration.ConfigureServices(serviceCollection);
+        var serviceProvider = serviceCollection.BuildServiceProvider();
+
+        var validator = serviceProvider.GetService<IValidator<LogConversionRequest>>();
+        var request = new LogConversionRequest { SourceUrl = sourceUrl, TargetPath = targetPath };
+        var validationResult = validator.Validate(request);
+
+        if (!validationResult.IsValid)
+        {
+            foreach (var failure in validationResult.Errors)
+            {
+                Console.WriteLine($"Erro de validação: {failure.ErrorMessage}");
+            }
+            return;
+        }
 
         var converter = serviceProvider.GetService<ILogConverter>();
 
-        string sourceUrl = "https://s3.amazonaws.com/uux-itaas-static/minha-cdn-logs/input-01.txt"; // Exemplo de URL de teste
-
-        // Definir o caminho de destino na pasta "Documentos" do usuário
-        string targetDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ConvertedLogs");
-        Directory.CreateDirectory(targetDirectory); // Cria o diretório se não existir
-        string targetPath = Path.Combine(targetDirectory, "teste.txt");
-
         try
         {
-            Console.WriteLine("Starting conversion...");
+            Console.WriteLine("Iniciando a conversão...");
             await converter.Convert(sourceUrl, targetPath);
             Console.WriteLine($"Log convertido salvo em: {targetPath}");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error during conversion: {ex.Message}");
+            Console.WriteLine($"Erro durante a conversão: {ex.Message}");
         }
     }
 }
