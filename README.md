@@ -14,13 +14,16 @@ Este projeto consiste em um aplicativo de console desenvolvido para converter ar
 ## Formatos de Log
 
 ### Formato "MINHA CDN"
+```plaintext
 312|200|HIT|"GET /robots.txt HTTP/1.1"|100.2
 101|200|MISS|"POST /myImages HTTP/1.1"|319.4
 199|404|MISS|"GET /not-found HTTP/1.1"|142.9
 312|200|INVALIDATE|"GET /robots.txt HTTP/1.1"|245.1
+```
 
 
 ### Formato "Agora"
+```plaintext
 #Version: 1.0
 #Date: 15/12/2017 23:01:06
 #Fields: provider http-method status-code uri-path time-taken response-size cache-status
@@ -28,6 +31,7 @@ Este projeto consiste em um aplicativo de console desenvolvido para converter ar
 "MINHA CDN" POST 200 /myImages 319 101 MISS
 "MINHA CDN" GET 404 /not-found 143 199 MISS
 "MINHA CDN" GET 200 /robots.txt 245 312 REFRESH_HIT
+```
 
 
 ## Como Usar
