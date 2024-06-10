@@ -33,7 +33,7 @@ namespace LogConverter.Tests.Services
             var sourceUrl = "https://example.com/log.txt";
             var targetPath = "output.txt";
             var logLines = new[] { "log line 1", "log line 2" };
-            var logEntries = new List<LogEntry> { new LogEntry() };
+            var logEntries = new List<LogEntry> { new() };
             var formattedLog = "formatted log";
 
             _mockLogFetcher.Setup(x => x.FetchLogAsync(sourceUrl)).ReturnsAsync(logLines);
@@ -41,10 +41,8 @@ namespace LogConverter.Tests.Services
             _mockLogFormatter.Setup(x => x.Format(logEntries)).Returns(formattedLog);
             _mockLogWriter.Setup(x => x.WriteLog(targetPath, formattedLog));
 
-            // Act
             await _logConversionService.Convert(sourceUrl, targetPath);
 
-            // Assert
             _mockLogFetcher.Verify(x => x.FetchLogAsync(sourceUrl), Times.Once);
             _mockLogParser.Verify(x => x.Parse(logLines), Times.Once);
             _mockLogFormatter.Verify(x => x.Format(logEntries), Times.Once);
