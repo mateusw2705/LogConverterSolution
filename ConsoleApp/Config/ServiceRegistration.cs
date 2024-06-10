@@ -8,7 +8,7 @@ using LogConverter.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 
-namespace ConsoleApp;
+namespace ConsoleApp.Config;
 
 public static class ServiceRegistration
 {
