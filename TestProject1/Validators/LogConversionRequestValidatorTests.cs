@@ -17,26 +17,20 @@ namespace TestProject1.Validators
         [Fact]
         public void Should_Have_Error_When_SourceUrl_Is_Empty()
         {
-            // Arrange
             var request = new LogConversionRequest { SourceUrl = string.Empty, TargetPath = "C:\\output\\log.txt" };
 
-            // Act
             var result = _validator.TestValidate(request);
 
-            // Assert
             result.ShouldHaveValidationErrorFor(r => r.SourceUrl);
         }
 
         [Fact]
         public void Should_Have_Error_When_TargetPath_Is_Empty()
         {
-            // Arrange
             var request = new LogConversionRequest { SourceUrl = "https://example.com/log.txt", TargetPath = string.Empty };
 
-            // Act
             var result = _validator.TestValidate(request);
 
-            // Assert
             result.ShouldHaveValidationErrorFor(r => r.TargetPath);
         }
 
