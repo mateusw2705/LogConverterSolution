@@ -46,9 +46,10 @@ Para executar o aplicativo de console, use o seguinte comando no terminal:
 
 ```sh
 dotnet run --project LogConverter.ConsoleApp "sourceUrl" "targetPath"
-
+```
 Ou se preferir passar os parâmetros direto no launchsettings.json:
 
+```sh
 {
   "profiles": {
     "ConsoleApp1": {
@@ -58,6 +59,14 @@ Ou se preferir passar os parâmetros direto no launchsettings.json:
   }
 }
 
+Se tiver utilizando visual studio pode passar clicando com o botao direiro no projeto ConsoleApp
+-> Propriedades
+-> depurar
+-> abrir Depuração
+-> incluir argumentos da linha de comando
+
+e passar os parametros no local indicado, que seria o mesmo de passar no json
+```
 Argumentos
 sourceUrl: URL do arquivo de log no formato "MINHA CDN".
 targetPath: Caminho onde o arquivo convertido no formato "Agora" será salvo.
