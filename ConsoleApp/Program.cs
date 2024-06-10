@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Domain.Interfaces;
-using FluentValidation;
-using Domain.Request;
-using Application.Validators;
+﻿using Application.Validators;
 using ConsoleApp.Config;
 using ConsoleApp;
 
