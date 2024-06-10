@@ -1,7 +1,4 @@
 ﻿using Domain.Interfaces;
-using Domain.Request;
-using FluentValidation;
-using FluentValidation.Results;
 
 namespace LogConverter.Application.Services
 {

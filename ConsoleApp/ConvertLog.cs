@@ -26,7 +26,7 @@ public class ConvertLog
         try
         {
             Console.WriteLine("Iniciando a conversão...");
-            await converter.Convert(request.SourceUrl, request.TargetPath);
+            await converter!.Convert(request.SourceUrl, request.TargetPath);
             Console.WriteLine($"Log convertido salvo em: {request.TargetPath}");
         }
         catch (Exception ex)

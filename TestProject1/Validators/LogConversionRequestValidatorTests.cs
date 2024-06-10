@@ -1,6 +1,5 @@
 ﻿using Domain.Request;
 using FluentValidation.TestHelper;
-using Xunit;
 using Application.Validators;
 
 namespace TestProject1.Validators
