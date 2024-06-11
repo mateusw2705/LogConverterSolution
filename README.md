@@ -19,6 +19,8 @@ Este projeto consiste em um aplicativo de console desenvolvido para converter ar
 101|200|MISS|"POST /myImages HTTP/1.1"|319.4
 199|404|MISS|"GET /not-found HTTP/1.1"|142.9
 312|200|INVALIDATE|"GET /robots.txt HTTP/1.1"|245.1
+
+Este Formato foi obtido atraves do link : https://s3.amazonaws.com/uux-itaas-static/minha-cdn-logs/input-01.txt
 ```
 
 
