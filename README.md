@@ -43,6 +43,7 @@ Este projeto consiste em um aplicativo de console desenvolvido para converter ar
 ### Execução
 
 Para executar o aplicativo de console, use o seguinte comando no terminal apontando para ConsoleApp:
+OBS: O projeto de Inicialização deve ser Sempre ConsoleApp
 
 ```sh
 dotnet run "sourceUrl" "targetPath"
